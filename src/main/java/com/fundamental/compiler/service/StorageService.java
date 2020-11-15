@@ -12,4 +12,5 @@ public interface StorageService {
     public Stream<Path> loadAll();
     public void deleteAll();
     public Resource loadAsResource(String filename);
+    public int readRs(String filename);
 }

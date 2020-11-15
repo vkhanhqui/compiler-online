@@ -27,6 +27,14 @@ public class FileUploadController {
                 path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
                         "serveFile", path.getFileName().toString()).build().toUri().toString())
                 .collect(Collectors.toList()));
+        model.addAttribute("result", 12);
+        int your = storageService.readRs("");
+        model.addAttribute("your", your);
+        boolean isEqual = false;
+        if(your == 12){
+            isEqual = true;
+        }
+        model.addAttribute("isEqual", isEqual);
         return "uploadForm";
     }
 

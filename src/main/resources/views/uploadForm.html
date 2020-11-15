@@ -6,6 +6,12 @@
 </div>
 
 <div>
+    <h1>Result: <span th:text="${result}"></span></h1>
+    <h1>Your: <span th:text="${your}"></span></h1>
+    <h1>Finally: <span th:text="${isEqual}"></span></h1>
+</div>
+
+<div>
     <form method="POST" enctype="multipart/form-data" action="/upload">
         <table>
             <tr><td>Upload your code:</td><td><input type="file" name="file" /></td></tr>

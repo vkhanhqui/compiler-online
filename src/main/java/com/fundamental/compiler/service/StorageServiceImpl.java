@@ -7,8 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -86,5 +85,24 @@ public class StorageServiceImpl implements StorageService {
             System.out.println("Could not read file: " + filename + e);
             return null;
         }
+    }
+
+    @Override
+    public int readRs(String filename){
+        int  rs=0;
+            try {
+                String location = "G:\\tailieuREstore\\java-Spring-framework\\implementation\\fundamental-compiler\\result-dir";
+                File dir = new File(location);
+                Runtime runtime = Runtime.getRuntime();
+                runtime.exec("gcc de1bai3.c", null, dir);
+                Process processRS = runtime.exec(location+"\\a.exe", null, dir);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(processRS.getInputStream()));
+                String saveRs = reader.readLine();
+                if(!saveRs.isEmpty())
+                    rs = Integer.parseInt(saveRs);
+            } catch (IOException io) {
+                System.out.println(io);
+            }
+        return rs;
     }
 }
