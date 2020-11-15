@@ -12,36 +12,56 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("upload")
+@SessionAttributes({"yours", "isEqualOrNot"})
 public class FileUploadController {
     @Autowired
     StorageService storageService;
 
     @GetMapping
-    public String uploadFile(Model model) {
-
-        model.addAttribute("files", storageService.loadAll().map(
+    public String uploadFile(Model model, HttpSession httpSession) {
+        List files = storageService.loadAll().map(
                 path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
                         "serveFile", path.getFileName().toString()).build().toUri().toString())
-                .collect(Collectors.toList()));
-        model.addAttribute("result", 12);
-        int your = storageService.readRs("");
-        model.addAttribute("your", your);
-        boolean isEqual = false;
-        if(your == 12){
-            isEqual = true;
+                .collect(Collectors.toList());
+        model.addAttribute("files", files);
+        String filename = "";
+        for (Object file : files) {
+            String element = file.toString();
+            if (element.endsWith(".c")) {
+                filename = element;
+            }
         }
-        model.addAttribute("isEqual", isEqual);
+//        static result (connect database to make it dynamic)
+        int result = 12;
+        model.addAttribute("result", result);
+//        recur this page until we get result of uploaded file
+        if (!filename.isEmpty()) {
+            int yours = storageService.readRs(filename);
+            if (yours != 0) {
+                httpSession.setAttribute("yours", yours);
+                if (yours == result) {
+                    httpSession.setAttribute("isEqualOrNot", true);
+                }
+                storageService.deleteAll();
+                storageService.init();
+            }
+            return "redirect:/upload";
+        }
+//        finally
+        model.addAttribute("yours", httpSession.getAttribute("yours"));
+        model.addAttribute("isEqualOrNot", httpSession.getAttribute("isEqualOrNot"));
         return "uploadForm";
     }
 
     @PostMapping("files/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
-
         Resource file = storageService.loadAsResource(filename);
         return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
                 "attachment; filename=\"" + file.getFilename() + "\"").body(file);

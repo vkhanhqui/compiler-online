@@ -88,21 +88,25 @@ public class StorageServiceImpl implements StorageService {
     }
 
     @Override
-    public int readRs(String filename){
-        int  rs=0;
+    public int readRs(String filename) {
+        int rs = 0;
+        File dir = new File(rootLocation.toAbsolutePath().toString());
+        if (!filename.isEmpty()) {
             try {
-                String location = "G:\\tailieuREstore\\java-Spring-framework\\implementation\\fundamental-compiler\\result-dir";
-                File dir = new File(location);
                 Runtime runtime = Runtime.getRuntime();
-                runtime.exec("gcc de1bai3.c", null, dir);
-                Process processRS = runtime.exec(location+"\\a.exe", null, dir);
-                BufferedReader reader = new BufferedReader(new InputStreamReader(processRS.getInputStream()));
+                String fileToExecute = filename.replace("http://localhost:9999/upload/files/", "");
+                Process processToExecuteCode = runtime.exec("gcc "+ fileToExecute, null, dir);
+                Process processToGetRS = runtime.exec(dir.getAbsolutePath() + "\\a.exe", null, dir);
+                BufferedReader reader = new BufferedReader(new InputStreamReader(processToGetRS.getInputStream()));
                 String saveRs = reader.readLine();
-                if(!saveRs.isEmpty())
+                if (!saveRs.isEmpty())
                     rs = Integer.parseInt(saveRs);
+                processToExecuteCode.destroy();
+                processToGetRS.destroy();
             } catch (IOException io) {
                 System.out.println(io);
             }
+        }
         return rs;
     }
 }
