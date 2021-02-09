@@ -1,10 +1,10 @@
 #code file
-get code file by id /
-add code file /
-edit code file
-delete code file by id
-get all code files /
-delete all code files /
+get code file by id/
+add code file/
+edit code file/
+delete code file by id/
+get all code files/
+delete all code files/
 
 #exercise
 get exercise by id/
@@ -13,3 +13,5 @@ edit exercise/
 delete exercise/
 get all exercises/
 delete all exercises/
+
+#docker

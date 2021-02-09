@@ -21,4 +21,6 @@ public interface CodeFileService {
     Set<CodeFileDTO> getAllCodeFiles();
 
     void deleteCodeFileById(String id);
+
+    CodeFileDTO editCodeFile(String id, MultipartFile file, String language, String idExercise);
 }

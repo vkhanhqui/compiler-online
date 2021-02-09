@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/compiler-online.iml" filepath="$PROJECT_DIR$/compiler-online.iml" />
       <module fileurl="file://$PROJECT_DIR$/online-compiler.iml" filepath="$PROJECT_DIR$/online-compiler.iml" />
     </modules>
   </component>

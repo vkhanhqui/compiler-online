@@ -50,8 +50,26 @@ public class CodeFileController {
         return ResponseEntity.ok("All code files are successfully deleted");
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteCodeFileById(
+            @PathVariable("id") String id
+    ) {
+        codeFileService.deleteCodeFileById(id);
+        return ResponseEntity.ok("Code file is successfully deleted with id: " + id);
+    }
+
     @GetMapping
     public ResponseEntity<Set<CodeFileDTO>> getAllCodeFiles() {
         return ResponseEntity.ok(codeFileService.getAllCodeFiles());
+    }
+
+    @PutMapping("{id}")
+    public ResponseEntity<CodeFileDTO> editCodeFile(
+            @RequestParam("file") MultipartFile file,
+            @PathVariable("id") String id,
+            @RequestParam("language") String language,
+            @RequestParam("idExercise") String idExercise
+    ) {
+        return ResponseEntity.ok(codeFileService.editCodeFile(id, file, language, idExercise));
     }
 }

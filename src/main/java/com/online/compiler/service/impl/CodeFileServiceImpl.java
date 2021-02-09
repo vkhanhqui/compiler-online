@@ -1,5 +1,8 @@
 package com.online.compiler.service.impl;
 
+import com.online.compiler.exception.EntityCreateFailedException;
+import com.online.compiler.exception.EntityDeleteFailedException;
+import com.online.compiler.exception.EntityUpdateFailedException;
 import com.online.compiler.model.CodeFile;
 import com.online.compiler.model.Exercise;
 import com.online.compiler.model.dto.CodeFileDTO;
@@ -14,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.persistence.EntityNotFoundException;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -51,22 +55,14 @@ public class CodeFileServiceImpl implements CodeFileService {
     @Override
     public CodeFileDTO addCodeFile(MultipartFile file, String language, String idExercise) {
         try {
-            Exercise exerciseEntity = exerciseRepository.findById(UUID.fromString(idExercise)).get();
+            Exercise exerciseEntity = exerciseRepository.findById(UUID.fromString(idExercise))
+                    .orElseThrow(EntityNotFoundException::new);
             CodeFile codeFileRequest = new CodeFile(language, exerciseEntity);
             CodeFile codeFileEntity = codeFileRepository.save(codeFileRequest);
-            Path destinationFile = MapperUtils.toDestinationFile(this.rootLocation, codeFileEntity.getFileName());
-            if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
-                System.out.println("Cannot store file outside current directory");
-            }
-            try (InputStream inputStream = file.getInputStream()) {
-                Files.copy(inputStream, destinationFile,
-                        StandardCopyOption.REPLACE_EXISTING);
-                compileCodeAndCompare(exerciseEntity, codeFileEntity);
-                return MapperUtils.modelMapper.map(codeFileRepository.save(codeFileEntity), CodeFileDTO.class);
-            }
-        } catch (IOException e) {
-            System.out.println("Failed to store file: " + e);
-            return null;
+            storeCodeFileEntity(codeFileEntity, file, exerciseEntity);
+            return MapperUtils.toCodeFileDTO(codeFileEntity);
+        } catch (IllegalArgumentException ex) {
+            throw new EntityCreateFailedException(ex.getMessage());
         }
     }
 
@@ -95,7 +91,8 @@ public class CodeFileServiceImpl implements CodeFileService {
 
     @Override
     public CodeFileDTO getCodeFileById(String idCodeFile) {
-        CodeFile codeFileEntity = codeFileRepository.findById(UUID.fromString(idCodeFile)).get();
+        CodeFile codeFileEntity = codeFileRepository.findById(UUID.fromString(idCodeFile))
+                .orElseThrow(EntityNotFoundException::new);
         return MapperUtils.toCodeFileDTO(codeFileEntity);
     }
 
@@ -107,7 +104,28 @@ public class CodeFileServiceImpl implements CodeFileService {
 
     @Override
     public void deleteCodeFileById(String id) {
-        codeFileRepository.deleteById(UUID.fromString(id));
+        try {
+            codeFileRepository.deleteById(UUID.fromString(id));
+        } catch (IllegalArgumentException ex) {
+            throw new EntityDeleteFailedException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public CodeFileDTO editCodeFile(String id, MultipartFile file, String language, String idExercise) {
+        try {
+            Exercise exerciseEntity = exerciseRepository.findById(UUID.fromString(idExercise))
+                    .orElseThrow(EntityNotFoundException::new);
+            CodeFile codeFileEntity = codeFileRepository.findById(UUID.fromString(id))
+                    .orElseThrow(EntityNotFoundException::new);
+            codeFileEntity.setStatus(false);
+            codeFileEntity.setExercise(exerciseEntity);
+            codeFileEntity.setLanguage(language);
+            storeCodeFileEntity(codeFileEntity, file, exerciseEntity);
+            return MapperUtils.toCodeFileDTO(codeFileEntity);
+        } catch (IllegalArgumentException ex) {
+            throw new EntityUpdateFailedException(ex.getMessage());
+        }
     }
 
     private void compileCodeAndCompare(Exercise exerciseEntity, CodeFile codeFileEntity) {
@@ -117,6 +135,24 @@ public class CodeFileServiceImpl implements CodeFileService {
         codeFileEntity.setResult(result);
         if (exerciseEntity.getResult() == codeFileEntity.getResult()) {
             codeFileEntity.setStatus(true);
+        }
+    }
+
+
+    private void storeCodeFileEntity(CodeFile codeFileEntity, MultipartFile file, Exercise exerciseEntity) {
+        try {
+            Path destinationFile = MapperUtils.toDestinationFile(this.rootLocation, codeFileEntity.getFileName());
+            if (!destinationFile.getParent().equals(this.rootLocation.toAbsolutePath())) {
+                System.out.println("Cannot store file outside current directory");
+            }
+            try (InputStream inputStream = file.getInputStream()) {
+                Files.copy(inputStream, destinationFile,
+                        StandardCopyOption.REPLACE_EXISTING);
+                compileCodeAndCompare(exerciseEntity, codeFileEntity);
+                codeFileRepository.save(codeFileEntity);
+            }
+        } catch (IOException e) {
+            System.out.println("Failed to store file: " + e);
         }
     }
 }

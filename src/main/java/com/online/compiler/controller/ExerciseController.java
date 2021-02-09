@@ -48,7 +48,7 @@ public class ExerciseController {
             @PathVariable("id") String id
     ) {
         exerciseService.deleteExerciseById(id);
-        return ResponseEntity.ok("successfully delete Exercise with id " + id);
+        return ResponseEntity.ok("Exercise is successfully deleted with id: "+id);
     }
 
     @DeleteMapping
