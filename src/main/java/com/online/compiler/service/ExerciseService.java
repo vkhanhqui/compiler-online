@@ -1,6 +1,6 @@
-package com.compiler.online.service;
+package com.online.compiler.service;
 
-import com.compiler.online.model.dto.ExerciseDTO;
+import com.online.compiler.model.dto.ExerciseDTO;
 
 import java.util.List;
 

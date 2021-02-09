@@ -1,7 +1,7 @@
-package com.compiler.online;
+package com.online.compiler;
 
-import com.compiler.online.model.Exercise;
-import com.compiler.online.model.repository.ExerciseRepository;
+import com.online.compiler.model.Exercise;
+import com.online.compiler.model.repository.ExerciseRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,10 +11,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 @SpringBootApplication
-public class CompilerOnlineApplication {
+public class OnlineCompilerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(CompilerOnlineApplication.class, args);
+        SpringApplication.run(OnlineCompilerApplication.class, args);
     }
 
     @Bean

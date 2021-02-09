@@ -2,7 +2,7 @@
 get code file by id /
 add code file /
 edit code file
-delete code file
+delete code file by id
 get all code files /
 delete all code files /
 

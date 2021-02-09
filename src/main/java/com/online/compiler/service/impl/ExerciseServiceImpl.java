@@ -1,10 +1,10 @@
-package com.compiler.online.service.impl;
+package com.online.compiler.service.impl;
 
-import com.compiler.online.model.Exercise;
-import com.compiler.online.model.dto.ExerciseDTO;
-import com.compiler.online.model.repository.ExerciseRepository;
-import com.compiler.online.utils.MapperUtils;
-import com.compiler.online.service.ExerciseService;
+import com.online.compiler.model.Exercise;
+import com.online.compiler.model.dto.ExerciseDTO;
+import com.online.compiler.model.repository.ExerciseRepository;
+import com.online.compiler.utils.MapperUtils;
+import com.online.compiler.service.ExerciseService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

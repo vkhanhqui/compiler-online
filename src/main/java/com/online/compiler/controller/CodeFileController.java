@@ -1,7 +1,7 @@
-package com.compiler.online.controller;
+package com.online.compiler.controller;
 
-import com.compiler.online.model.dto.CodeFileDTO;
-import com.compiler.online.service.CodeFileService;
+import com.online.compiler.model.dto.CodeFileDTO;
+import com.online.compiler.service.CodeFileService;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;

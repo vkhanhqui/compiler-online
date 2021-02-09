@@ -8,11 +8,11 @@
         <version>2.4.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.compiler.online</groupId>
-    <artifactId>compiler-online</artifactId>
+    <groupId>com.online.compiler</groupId>
+    <artifactId>online-compiler</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>compiler-online</name>
-    <description>Compiler Online Using Spring Boot</description>
+    <name>online-compiler</name>
+    <description>Online Compiler Using Spring Boot</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -51,7 +51,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-        <finalName>compiler-online</finalName>
+        <finalName>online-compiler</finalName>
     </build>
 
 </project>

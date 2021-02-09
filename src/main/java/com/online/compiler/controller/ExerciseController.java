@@ -1,7 +1,7 @@
-package com.compiler.online.controller;
+package com.online.compiler.controller;
 
-import com.compiler.online.model.dto.ExerciseDTO;
-import com.compiler.online.service.ExerciseService;
+import com.online.compiler.model.dto.ExerciseDTO;
+import com.online.compiler.service.ExerciseService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

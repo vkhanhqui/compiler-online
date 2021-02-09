@@ -1,9 +1,9 @@
-package com.compiler.online.utils;
+package com.online.compiler.utils;
 
-import com.compiler.online.model.CodeFile;
-import com.compiler.online.model.Exercise;
-import com.compiler.online.model.dto.CodeFileDTO;
-import com.compiler.online.model.dto.ExerciseDTO;
+import com.online.compiler.model.CodeFile;
+import com.online.compiler.model.Exercise;
+import com.online.compiler.model.dto.CodeFileDTO;
+import com.online.compiler.model.dto.ExerciseDTO;
 import org.modelmapper.ModelMapper;
 
 import java.nio.file.Path;

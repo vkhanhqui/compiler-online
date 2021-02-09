@@ -1,13 +1,13 @@
-package com.compiler.online.service.impl;
+package com.online.compiler.service.impl;
 
-import com.compiler.online.model.CodeFile;
-import com.compiler.online.model.Exercise;
-import com.compiler.online.model.dto.CodeFileDTO;
-import com.compiler.online.model.repository.CodeFileRepository;
-import com.compiler.online.model.repository.ExerciseRepository;
-import com.compiler.online.service.CodeFileService;
-import com.compiler.online.utils.CmdUtils;
-import com.compiler.online.utils.MapperUtils;
+import com.online.compiler.model.CodeFile;
+import com.online.compiler.model.Exercise;
+import com.online.compiler.model.dto.CodeFileDTO;
+import com.online.compiler.model.repository.CodeFileRepository;
+import com.online.compiler.model.repository.ExerciseRepository;
+import com.online.compiler.service.CodeFileService;
+import com.online.compiler.utils.CmdUtils;
+import com.online.compiler.utils.MapperUtils;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;

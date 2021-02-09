@@ -1,4 +1,4 @@
-package com.compiler.online.utils;
+package com.online.compiler.utils;
 
 import java.io.BufferedReader;
 import java.io.File;

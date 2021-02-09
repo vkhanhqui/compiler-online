@@ -1,4 +1,4 @@
-package com.compiler.online.model;
+package com.online.compiler.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.GenericGenerator;

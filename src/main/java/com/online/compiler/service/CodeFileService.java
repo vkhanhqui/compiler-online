@@ -1,6 +1,6 @@
-package com.compiler.online.service;
+package com.online.compiler.service;
 
-import com.compiler.online.model.dto.CodeFileDTO;
+import com.online.compiler.model.dto.CodeFileDTO;
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
 
