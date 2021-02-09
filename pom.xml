@@ -8,11 +8,11 @@
         <version>2.4.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.fundamental.compiler</groupId>
-    <artifactId>simple-compiler</artifactId>
+    <groupId>com.compiler.online</groupId>
+    <artifactId>compiler-online</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>fundamental-compiler</name>
-    <description>Fundamental Compiler With Spring Boot</description>
+    <name>compiler-online</name>
+    <description>Compiler Online Using Spring Boot</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -51,7 +51,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
-        <finalName>fundamental-compiler</finalName>
+        <finalName>compiler-online</finalName>
     </build>
 
 </project>

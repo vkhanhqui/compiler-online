@@ -1,4 +1,4 @@
-package com.fundamental.compiler.model.dto;
+package com.compiler.online.model.dto;
 
 import java.util.UUID;
 
@@ -8,20 +8,19 @@ public class CodeFileDTO {
 
     private String language;
 
-    private String link;
-
     private int result;
+
+    private boolean status;
 
     private UUID idExercise;
 
-    public CodeFileDTO(){
+    public CodeFileDTO() {
 
     }
 
-    public CodeFileDTO(UUID id, String language, String link, int result, UUID idExercise) {
+    public CodeFileDTO(UUID id, String language, int result, UUID idExercise) {
         this.id = id;
         this.language = language;
-        this.link = link;
         this.result = result;
         this.idExercise = idExercise;
     }
@@ -42,14 +41,6 @@ public class CodeFileDTO {
         this.result = result;
     }
 
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
-
     public String getLanguage() {
         return language;
     }
@@ -64,5 +55,13 @@ public class CodeFileDTO {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 }

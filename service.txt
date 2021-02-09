@@ -1,0 +1,15 @@
+#code file
+get code file by id /
+add code file /
+edit code file
+delete code file
+get all code files /
+delete all code files /
+
+#exercise
+get exercise by id/
+add exercise/
+edit exercise/
+delete exercise/
+get all exercises/
+delete all exercises/

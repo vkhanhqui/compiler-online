@@ -1,4 +1,4 @@
-package com.fundamental.compiler.model.dto;
+package com.compiler.online.model.dto;
 
 
 import java.util.Set;

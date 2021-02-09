@@ -1,4 +1,4 @@
-package com.fundamental.compiler.model;
+package com.compiler.online.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.GenericGenerator;
@@ -18,11 +18,11 @@ public class CodeFile {
     @Column(length = 10, nullable = false)
     private String language;
 
-    @Column(nullable = false, unique = true)
-    private String link;
-
     @Column(nullable = false)
     private int result;
+
+    @Column(nullable = false)
+    private boolean status = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "idExercise")
@@ -32,9 +32,8 @@ public class CodeFile {
 
     }
 
-    public CodeFile(String language, String link, Exercise exercise) {
+    public CodeFile(String language, Exercise exercise) {
         this.language = language;
-        this.link = link;
         this.exercise = exercise;
     }
 
@@ -55,14 +54,6 @@ public class CodeFile {
         this.language = language;
     }
 
-    public String getLink() {
-        return link;
-    }
-
-    public void setLink(String link) {
-        this.link = link;
-    }
-
     public int getResult() {
         return result;
     }
@@ -77,5 +68,17 @@ public class CodeFile {
 
     public void setId(UUID id) {
         this.id = id;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public String getFileName() {
+        return this.id + "." + this.getLanguage();
     }
 }

@@ -1,8 +1,9 @@
-package com.fundamental.compiler.utils;
+package com.compiler.online.utils;
 
-import com.fundamental.compiler.model.CodeFile;
-import com.fundamental.compiler.model.Exercise;
-import com.fundamental.compiler.model.dto.ExerciseDTO;
+import com.compiler.online.model.CodeFile;
+import com.compiler.online.model.Exercise;
+import com.compiler.online.model.dto.CodeFileDTO;
+import com.compiler.online.model.dto.ExerciseDTO;
 import org.modelmapper.ModelMapper;
 
 import java.nio.file.Path;
@@ -41,6 +42,10 @@ public class MapperUtils {
                         }
                 );
         return modelMapper.map(exercise, ExerciseDTO.class);
+    }
+
+    public static CodeFileDTO toCodeFileDTO(CodeFile codeFile) {
+        return modelMapper.map(codeFile, CodeFileDTO.class);
     }
 
 }

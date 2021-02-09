@@ -1,6 +1,6 @@
-package com.fundamental.compiler.model.repository;
+package com.compiler.online.model.repository;
 
-import com.fundamental.compiler.model.CodeFile;
+import com.compiler.online.model.CodeFile;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

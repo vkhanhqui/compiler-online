@@ -1,4 +1,4 @@
-package com.fundamental.compiler.model;
+package com.compiler.online.model;
 
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -30,6 +30,10 @@ public class Exercise {
     public Exercise(int result, Set<CodeFile> codeFiles) {
         this.result = result;
         this.codeFiles = codeFiles;
+    }
+
+    public Exercise(int result){
+        this.result = result;
     }
 
     @JsonManagedReference
