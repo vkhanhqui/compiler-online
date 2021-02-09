@@ -12,8 +12,8 @@ public class CmdUtils {
         try {
             String command = "gcc -o " + id + " " + filename;
             Process processToCompileCode = runtime.exec(command, null, dir);
-            processToCompileCode.waitFor(1, TimeUnit.SECONDS);
             System.out.println("compile gcc successfully");
+            processToCompileCode.waitFor(1, TimeUnit.SECONDS);
             processToCompileCode.destroy();
             String exeFile = id + ".exe";
             Process processToGetRS = runtime.exec(dir.getAbsolutePath() + "\\" + exeFile, null, dir);

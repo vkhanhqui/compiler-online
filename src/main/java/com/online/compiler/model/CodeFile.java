@@ -2,6 +2,7 @@ package com.online.compiler.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -12,7 +13,8 @@ public class CodeFile {
     @Id
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     @GeneratedValue(generator = "uuid", strategy = GenerationType.IDENTITY)
-    @Column(unique = true, nullable = false, updatable = false, columnDefinition = "BINARY(16)")
+    @Column(unique = true, nullable = false, updatable = false)
+    @Type(type = "uuid-binary")
     private UUID id;
 
     @Column(length = 10, nullable = false)
