@@ -113,7 +113,7 @@ public class CodeFileServiceImpl implements CodeFileService {
     private void compileCodeAndCompare(Exercise exerciseEntity, CodeFile codeFileEntity) {
         File dir = new File(rootLocation.toAbsolutePath().toString());
         Runtime runtime = Runtime.getRuntime();
-        int result = CmdUtils.compileFile(codeFileEntity.getFileName(), runtime, dir);
+        int result = CmdUtils.compileFile(codeFileEntity.getId().toString(), codeFileEntity.getFileName(), runtime, dir);
         codeFileEntity.setResult(result);
         if (exerciseEntity.getResult() == codeFileEntity.getResult()) {
             codeFileEntity.setStatus(true);

@@ -4,22 +4,26 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.concurrent.TimeUnit;
 
 public class CmdUtils {
 
-    public static int compileFile(String filename, Runtime runtime, File dir) {
+    public static int compileFile(String id, String filename, Runtime runtime, File dir) {
         try {
-            Process processToExecuteCode = runtime.exec("gcc " + filename, null, dir);
-            Process processToGetRS = runtime.exec(dir.getAbsolutePath() + "\\a.exe", null, dir);
+            String command = "gcc -o " + id + " " + filename;
+            Process processToCompileCode = runtime.exec(command, null, dir);
+            processToCompileCode.waitFor(1, TimeUnit.SECONDS);
+            processToCompileCode.destroy();
+            String exeFile = id + ".exe";
+            Process processToGetRS = runtime.exec(dir.getAbsolutePath() + "\\" + exeFile, null, dir);
             BufferedReader reader = new BufferedReader(new InputStreamReader(processToGetRS.getInputStream()));
             String result = reader.readLine();
             processToGetRS.destroy();
-            processToExecuteCode.destroy();
             if (!result.isEmpty()) {
                 return Integer.parseInt(result);
             }
-        } catch (IOException io) {
-            System.out.println(io);
+        } catch (IOException | InterruptedException ex) {
+            System.out.println(ex);
         }
         return 0;
     }
