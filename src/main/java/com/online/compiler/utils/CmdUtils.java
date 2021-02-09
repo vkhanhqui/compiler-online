@@ -13,9 +13,11 @@ public class CmdUtils {
             String command = "gcc -o " + id + " " + filename;
             Process processToCompileCode = runtime.exec(command, null, dir);
             processToCompileCode.waitFor(1, TimeUnit.SECONDS);
+            System.out.println("compile gcc successfully");
             processToCompileCode.destroy();
             String exeFile = id + ".exe";
             Process processToGetRS = runtime.exec(dir.getAbsolutePath() + "\\" + exeFile, null, dir);
+            System.out.println("execute .exe successfully");
             BufferedReader reader = new BufferedReader(new InputStreamReader(processToGetRS.getInputStream()));
             String result = reader.readLine();
             processToGetRS.destroy();

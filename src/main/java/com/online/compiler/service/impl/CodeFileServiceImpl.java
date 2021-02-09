@@ -47,6 +47,7 @@ public class CodeFileServiceImpl implements CodeFileService {
     public void initRoot() {
         try {
             Files.createDirectories(rootLocation);
+            System.out.println("create upload-dir successfully");
         } catch (IOException e) {
             System.out.println("Could not initialize storage: " + e);
         }
@@ -150,6 +151,7 @@ public class CodeFileServiceImpl implements CodeFileService {
                         StandardCopyOption.REPLACE_EXISTING);
                 compileCodeAndCompare(exerciseEntity, codeFileEntity);
                 codeFileRepository.save(codeFileEntity);
+                System.out.println("save code file successfully");
             }
         } catch (IOException e) {
             System.out.println("Failed to store file: " + e);
