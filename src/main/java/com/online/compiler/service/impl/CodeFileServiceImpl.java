@@ -47,7 +47,7 @@ public class CodeFileServiceImpl implements CodeFileService {
     public void initRoot() {
         try {
             Files.createDirectories(rootLocation);
-            System.out.println("create upload-dir successfully");
+            System.out.println("create upload-dir successfully with path: " + rootLocation.toAbsolutePath().toString());
         } catch (IOException e) {
             System.out.println("Could not initialize storage: " + e);
         }
